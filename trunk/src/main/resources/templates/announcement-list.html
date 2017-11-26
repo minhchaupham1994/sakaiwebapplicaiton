@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Announcement List</title>
+</head>
+<body>
+	<div th:if="${announcements != null}">
+	    <ul>
+	       <li th:each="item : ${announcements}" th:text="${item.title}"></li>
+	    </ul>
+	</div>
+
+</body>
+</html>
