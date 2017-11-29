@@ -2,27 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Login page</title>
+<link rel="stylesheet" type="text/css" href="/css/login.css" />
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-	<form th:action="@{/login}" method="post">
-		<fieldset>
-			<h1>Please Sign In</h1>
-
-			<div th:if="${param.error}">
-				<div class="alert alert-danger">Invalid username and password.</div>
-			</div>
-			<div th:if="${param.logout}">
-				<div class="alert alert-info">You have been logged out.</div>
-			</div>
-			<input type="text" name="userid" id="userid" placeholder="User Id"/>
-			<br/>
-			<input type="password" name="password" id="password" placeholder="Password"/>
-			<br/>
-			<input type="submit" value="Sign In" />
-			
-			<!-- Hidden field for authentication - Do not remove -->
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		</fieldset>
+	<form th:action="@{/login}" method="post" class="loginForm">
+		<div th:if="${param.error}">
+			<div class="alert alert-danger">Invalid username and password.</div>
+		</div>
+		<div th:if="${param.logout}">
+			<div class="alert alert-info">You have been logged out.</div>
+		</div>
+		
+		<div class="login">
+		  <div class="login-triangle"></div>
+		  
+		  <h2 class="login-header">Log in</h2>
+		
+		  <div class="login-container">
+		    <p><input type="text" name="userid" id="userid" placeholder="User Id"/></p>
+		    <p><input type="password" name="password" id="password" placeholder="Password"/></p>
+		    <p><input type="submit" value="Sign In"/></p>
+		  </div>
+		</div>
+		
+		<!-- Hidden field for authentication - Do not remove -->
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>
+	
+	<script>
+		$(function(){
+			heightCalculate();
+		})
+		
+		function heightCalculate() {
+			var srcHeight = window.innerHeight;
+			var formHeight = $('.loginForm').height();
+			var top = (srcHeight - formHeight)/2;
+			if (top > 0) {
+				$('.loginForm').css('padding-top', top);
+			}
+		}
+		
+		$( window ).resize(function() {
+			heightCalculate();
+		});
+	</script>
 </body>
 </html>
