@@ -37,8 +37,16 @@ public class FrontFilter implements Filter {
 		try {
 			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 			HttpSession session = httpServletRequest.getSession();
+			boolean isWhiteList = false;
 			
-			if (whiteList.contains(((HttpServletRequest) request).getRequestURI()) || session.getAttribute(SakaiConstant.CURRENT_USER) != null) {
+			for (String url: whiteList) {
+				if (((HttpServletRequest) request).getRequestURI().contains(url)) {
+					isWhiteList = true;
+					break;
+				}
+			}
+			
+			if (isWhiteList || session.getAttribute(SakaiConstant.CURRENT_USER) != null) {
 				chain.doFilter(request, response);
 			} else {
 				((HttpServletResponse) response).sendRedirect("/login");
