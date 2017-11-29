@@ -1,0 +1,19 @@
+<!-- /*
+* Name: Homepage
+* Description: The page shows after user having logged in.
+* Controller: LoginController.java
+* Model: announcements typeOf List<Announcement>
+*/ -->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Home page</title>
+</head>
+<body>
+	<div th:if="${announcements != null}">
+	    <ul>
+	       <li th:each="item : ${announcements}" th:text="${item.title}"></li>
+	    </ul>
+	</div>
+</body>
+</html>

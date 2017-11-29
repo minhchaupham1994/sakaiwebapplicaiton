@@ -7,5 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface IUserService {
-	boolean authenticate(String userId, String password);	
+	User authenticate(String userId, String password);
+	User getDefaultUser(String userId);	
 }
